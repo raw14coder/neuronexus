@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Maker</title>
+<style>
+    /* Basic styling */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    input[type="text"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input[type="button"], input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+    }
+    input[type="button"]:hover, input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    .question-container {
+        margin-bottom: 20px;
+    }
+    .question-container input {
+        margin-bottom: 5px;
+    }
+</style>
+</head>
+<body>
+
+<form id="quizForm">
+    <h2>Create Quiz</h2>
+    <label for="quizTitle">Quiz Title:</label>
+    <input type="text" id="quizTitle" name="quizTitle" required>
+
+    <div id="questionsContainer">
+        <div class="question-container">
+            <label for="question1">Question 1:</label>
+            <input type="text" id="question1" name="question[]" required>
+            <label for="answer1">Answer 1:</label>
+            <input type="text" id="answer1" name="answer[]" required>
+            <label for="answer2">Answer 2:</label>
+            <input type="text" id="answer2" name="answer[]" required>
+            <label for="answer3">Answer 3:</label>
+            <input type="text" id="answer3" name="answer[]" required>
+            <label for="correctAnswer1">Correct Answer Index:</label>
+            <input type="number" id="correctAnswer1" name="correctAnswer[]" min="1" max="3" required>
+        </div>
+    </div>
+
+    <input type="button" value="Add Question" onclick="addQuestion()">
+    <input type="submit" value="Create Quiz">
+</form>
+
+<script>
+    let questionCount = 1;
+
+    function addQuestion() {
+        questionCount++;
+        const questionsContainer = document.getElementById('questionsContainer');
+
+        const questionContainer = document.createElement('div');
+        questionContainer.classList.add('question-container');
+
+        questionContainer.innerHTML = `
+            <label for="question${questionCount}">Question ${questionCount}:</label>
+            <input type="text" id="question${questionCount}" name="question[]" required>
+            <label for="answer${questionCount}1">Answer 1:</label>
+            <input type="text" id="answer${questionCount}1" name="answer[]" required>
+            <label for="answer${questionCount}2">Answer 2:</label>
+            <input type="text" id="answer${questionCount}2" name="answer[]" required>
+            <label for="answer${questionCount}3">Answer 3:</label>
+            <input type="text" id="answer${questionCount}3" name="answer[]" required>
+            <label for="correctAnswer${questionCount}">Correct Answer Index:</label>
+            <input type="number" id="correctAnswer${questionCount}" name="correctAnswer[]" min="1" max="3" required>
+        `;
+
+        questionsContainer.appendChild(questionContainer);
+    }
+</script>
+
+</body>
+</html>
